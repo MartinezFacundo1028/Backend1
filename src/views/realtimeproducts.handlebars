@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos en Tiempo Real</title>
+</head>
+<body>
+    <h1>Lista de Productos en Tiempo Real</h1>
+    <h2>Lista de Productos</h2>
+    
+    <ul id="lista-productos">
+        {{#each products}}
+            <li id="product-{{this.id}}">
+                <strong>{{this.title}}</strong>: {{this.description}} - ${{this.price}} (Stock: {{this.stock}})
+                <button onclick="deleteProduct({{this.id}})">Eliminar</button>
+            </li>
+        {{/each}}
+    </ul>
+
+    <form id="add-product-form">
+        <input type="text" id="title" name="title" placeholder="Título" required>
+        <input type="text" id="description" name="description" placeholder="Descripción" required>
+        <input type="number" id="price" name="price" placeholder="Precio" required>
+        <input type="number" id="stock" name="stock" placeholder="Stock" required>
+        <input type="text" id="img" name="img" placeholder="Imagen" required>
+        <input type="text" id="code" name="code" placeholder="Código" required>
+        <button type="submit">Agregar Producto</button>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<h1>Hola Mundo, estamos mostrando una vista con Express Handlebars</h1>
+    <h2>Lista de Productos</h2>
+    
+    <ul id="lista-productos">
+        {{#each products}}
+            <li>
+                <strong>{{this?.title}}</strong>: {{this?.description}} - ${{this?.price}} (Stock: {{this?.stock}})
+            </li>
+        {{/each}}
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/index.js"></script>
