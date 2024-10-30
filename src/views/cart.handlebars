@@ -1,0 +1,61 @@
+<div class="cart-container">
+    <h1>Carrito #{{cartId}}</h1>
+
+    {{#if products.length}}
+        <div class="products-list">
+            {{#each products}}
+                <div class="product-item">
+                    <h3>{{productId.title}}</h3>
+                    <p>Precio unitario: ${{productId.price}}</p>
+                    <p>Cantidad: {{quantity}}</p>
+                    <p>Subtotal: ${{multiply productId.price quantity}}</p>
+                    <p class="category-tag">Categoría: {{productId.category}}</p>
+                </div>
+            {{/each}}
+        </div>
+        
+        <div class="cart-total">
+            <h2>Total del carrito: ${{total}}</h2>
+        </div>
+    {{else}}
+        <p class="empty-cart">No hay productos en este carrito</p>
+    {{/if}}
+</div>
+
+<style>
+    .cart-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .product-item {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .cart-total {
+        margin-top: 20px;
+        text-align: right;
+        font-weight: bold;
+    }
+
+    .empty-cart {
+        text-align: center;
+        color: #666;
+        font-style: italic;
+    }
+
+    .category-tag {
+        display: inline-block;
+        background-color: #e0e0e0;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.9em;
+        color: #666;
+    }
+</style> 

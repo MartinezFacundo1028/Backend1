@@ -4,31 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos en Tiempo Real</title>
+    <style>
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>Lista de Productos en Tiempo Real</h1>
-    <h2>Lista de Productos</h2>
     
-    <ul id="lista-productos">
+    <div class="products-container">
         {{#each products}}
-            <li id="product-{{this.id}}">
-                <strong>{{this.title}}</strong>: {{this.description}} - ${{this.price}} (Stock: {{this.stock}})
-                <button onclick="deleteProduct({{this.id}})">Eliminar</button>
-            </li>
+            <div class="product-card" id="product-{{this._id}}">
+                <div class="product-info">
+                    <h3>{{this.title}}</h3>
+                    <p>{{this.description}}</p>
+                    <p><strong>Precio:</strong> ${{this.price}}</p>
+                    <p><strong>Stock:</strong> {{this.stock}}</p>
+                </div>
+                <div class="product-actions">
+                    <input type="number" class="quantity-input" min="1" max="{{this.stock}}" value="1">
+                    <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
+                </div>
+                <div class="product-actions">
+                    <button onclick="viewDetails('{{this._id}}')">Ver detalle</button>
+                    <button onclick="deleteProduct('{{this._id}}')">Eliminar</button>
+                </div>
+            </div>
         {{/each}}
-    </ul>
+    </div>
+
+    <div class="pagination">
+        {{#if hasPrevPage}}
+            <button onclick="changePage({{prevPage}})">Anterior</button>
+        {{/if}}
+        <span>Página {{currentPage}} de {{totalPages}}</span>
+        {{#if hasNextPage}}
+            <button onclick="changePage({{nextPage}})">Siguiente</button>
+        {{/if}}
+    </div>
 
     <form id="add-product-form">
         <input type="text" id="title" name="title" placeholder="Título" required>
         <input type="text" id="description" name="description" placeholder="Descripción" required>
         <input type="number" id="price" name="price" placeholder="Precio" required>
         <input type="number" id="stock" name="stock" placeholder="Stock" required>
-        <input type="text" id="img" name="img" placeholder="Imagen" required>
         <input type="text" id="code" name="code" placeholder="Código" required>
+        <input type="text" id="category" name="category" placeholder="Categoría" required>
         <button type="submit">Agregar Producto</button>
     </form>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/index.js"></script>
 </body>
 </html>

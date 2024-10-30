@@ -1,0 +1,57 @@
+<div class="product-details-container">
+    <h1 class="main-title">Detalle del Producto</h1>
+
+    <div class="product-card">
+        <h2>{{product.title}}</h2>
+        
+        <div class="product-info">
+            <p class="description"><strong>Descripción:</strong> {{product.description}}</p>
+            <p class="price"><strong>Precio:</strong> ${{product.price}}</p>
+            <p class="stock"><strong>Stock disponible:</strong> {{product.stock}} unidades</p>
+            <p class="category"><strong>Categoría:</strong> {{product.category}}</p>
+            <p class="code"><strong>Código:</strong> {{product.code}}</p>
+        </div>
+
+        <div class="actions">
+            <button class="add-to-cart-btn" onclick="addToCart('{{product._id}}')">
+                Agregar al Carrito
+            </button>
+            <a href="/realtimeproducts" class="back-btn">Volver al listado</a>
+        </div>
+    </div>
+</div>
+<script src="/js/index.js"></script>
+<style>
+    .product-details-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .main-title {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .product-card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .product-info {
+        margin: 20px 0;
+    }
+
+    .product-info p {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+    }
+</style> 
