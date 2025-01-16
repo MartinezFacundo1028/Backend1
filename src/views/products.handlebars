@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Asegúrate de incluir tu CSS -->
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+
+    {{#if products.length}}
+        <ul>
+            {{#each products}}
+                <li>
+                    <strong>{{this.title}}</strong>: {{this.description}} - ${{this.price}} (Stock: {{this.stock}})
+                    <a href="/products/{{this._id}}">Ver Detalles</a>
+                </li>
+            {{/each}}
+        </ul>
+
+        <div class="pagination">
+            {{#if hasPrevPage}}
+                <a href="/products?page={{prevPage}}&limit={{../limit}}">Anterior</a>
+            {{/if}}
+            <span>Página {{currentPage}} de {{totalPages}}</span>
+            {{#if hasNextPage}}
+                <a href="/products?page={{nextPage}}&limit={{../limit}}">Siguiente</a>
+            {{/if}}
+        </div>
+    {{else}}
+        <p>No hay productos disponibles.</p>
+    {{/if}}
+
+    <a href="/">Volver a la página principal</a>
+</body>
+</html> 

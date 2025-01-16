@@ -1,6 +1,6 @@
 <h2> Registro de Usuarios </h2>
 
-<form class="formulario-usuario" action="/api/sessions/register" method="POST">
+<form class="formulario-usuario" action="/api/sessions/register" method="POST" onsubmit="redirectToLogin()">
     <div class="form-group">
         <label for="first_name">Nombre:</label>
         <input type="text" id="first_name" name="first_name" required>
@@ -28,6 +28,13 @@
 
     <button type="submit">Enviar</button>
 </form>
+
+<script>
+function redirectToLogin() {
+    // Redirige a la página de inicio de sesión después de enviar el formulario
+    window.location.href = '/';
+}
+</script>
 
 <style>
 .formulario-usuario {

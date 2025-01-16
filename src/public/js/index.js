@@ -1,7 +1,19 @@
 const socket = io();
 const form = document.getElementById('add-product-form');
 const productList = document.getElementById('lista-productos');
+const cartCountElement = document.getElementById('cart-count');
 
+// Función para actualizar el contador del carrito
+function updateCartCount(count) {
+    cartCountElement.textContent = count;
+}
+
+// Escuchar el evento de actualización del carrito
+socket.on('cartUpdated', (cart) => {
+    updateCartCount(cart.length); // Suponiendo que cart es un array de productos
+});
+
+// Manejo del formulario para agregar productos
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const newProduct = {
@@ -14,6 +26,7 @@ form.addEventListener('submit', (e) => {
     };
     socket.emit('addProduct', newProduct);
     
+    // Limpiar el formulario
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('price').value = '';
